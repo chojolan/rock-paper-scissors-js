@@ -1,13 +1,17 @@
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => { button.addEventListener('click', getPlayerChoice)});
+
+const results = document.querySelector(".results");
+
 let playerScore = 0;
 let computerScore = 0;
 
 function game(){
 // Play the game for 5 rounds, each round call the playRound function to get both inputs //
-    for (let i = 0; i < 5; i++) {
-        console.log("-----------This is a new round-----------");
-        playRound(getPlayerChoice(), getComputerChoice());
+for (let i = 0; i < 5; i++) {
+    console.log("-----------Starting new round-----------");
+    playRound(getPlayerChoice(), getComputerChoice());
 }
-
 // Print the results //
 
 console.log ("-----------Results-----------");

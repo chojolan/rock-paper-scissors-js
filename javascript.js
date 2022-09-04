@@ -15,7 +15,7 @@ player.textContent = `Player's score: ${playerScore}`;
 const computer = document.querySelector(".computerPoints");
 computer.textContent = `Computer's score: ${computerScore}`;
 
-// Pick a random number from 1 to 3. 1 being "Rock", 2 being "Paper", 3 being "Scissors". //
+// Pick a random number from 1 to 3. //
 
 function getComputerChoice() {
     let computerChoiceId = Math.floor(Math.random()*3) + 1;
@@ -26,10 +26,13 @@ function getComputerChoice() {
     } else {
         computerSelection = "scissors";
 }
+    console.log(`Computer: ${computerChoiceId}`);
+    console.log(`Computer: ${(computerSelection)}`);
     return computerSelection;
+    
 }
 
-// Ask user for their choice and conver the string to lowercase to avoid errors when comparing an uppercase string to a lowercase string//
+// get button ID to facilitate player selection for later comparison
 
 function getPlayerChoice(e) {
     playerChoiceId = (e.target.id);
@@ -37,29 +40,25 @@ function getPlayerChoice(e) {
     else if(playerChoiceId == 2){playerSelection = 'paper'}
     else(playerSelection = 'scissors');
     console.log(playerChoiceId);
-    console.log(playerSelection)
+    console.log(playerSelection);
+    playRound(playerSelection, getComputerChoice());
 }
-
 
 // Compare both inputs and update each player's scores //
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         roundResults.textContent = `It's a tie!`;
-        playerPoints.textContent = `Your score: ${playerScore}`;
-        computerPoints.textContent = `Computer's score: ${computerScore}`;
+        player.textContent = `Your score: ${playerScore}`;
+        computer.textContent = `Computer's score: ${computerScore}`;
     } else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "paper" && computerSelection === "scissors" || playerSelection === "scissors" && computerSelection === "rock") {
-        roundResults.textContent = `You lost this time.`;
-        computerScore++;
-        roundResults.textContent = `Your score: ${playerScore}`;
-        roundResults.textContent = `Computer's score: ${computerScore}`;
+        roundResults.textContent = `You lost this round, ${computerSelection} beats ${playerSelection}`;
+        player.textContent = `Your score: ${playerScore}`;
+        computer.textContent = `Computer's score: ${computerScore++}`;
     } else if (playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "paper" && computerSelection === "rock" || playerSelection === "scissors" && computerSelection === "paper") {
-        roundResults.textContent = `You won this time!`;
-        playerScore++;
-        roundResults.textContent = `Your score: ${playerScore}`;
-        roundResults.textContent = `Computer's score: ${computerScore}`;
-    } else {
-        roundResults.textContent = `Invalid input`;
+        roundResults.textContent = `You won this round, ${playerSelection} beats ${computerSelection}`;
+        player.textContent = `Your score: ${playerScore++}`;
+        computer.textContent = `Computer's score: ${computerScore}`;
     }
     getResults();
 }
@@ -67,11 +66,16 @@ function playRound(playerSelection, computerSelection) {
     // Print the results //
 
 function getResults(){
-if (playerScore === 5) {
-    results.textContent = "You won the game against the computer!";
-} else if (computerScore === 5) {
-    results.textContent = "A computer beat you lol";
-} else {
-    results.textContent = "The game ends in a tie!";
+if (playerScore == 5 || computerScore == 5) {
+    if(playerScore > computerScore){
+        results.textContent = "You won the game against the computer!";
+        buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
+    } else if (computerScore > playerScore){
+        results.textContent = "A computer beat you lol";
+        buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
+    } else {
+        results.textContent = "The game ends in a tie.";
+        buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
+    }
 }
 }

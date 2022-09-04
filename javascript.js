@@ -47,17 +47,19 @@ function getPlayerChoice(e) {
 // Compare both inputs and update each player's scores //
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
+    if (playerSelection == computerSelection) {
         roundResults.textContent = `It's a tie!`;
         player.textContent = `Your score: ${playerScore}`;
         computer.textContent = `Computer's score: ${computerScore}`;
-    } else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "paper" && computerSelection === "scissors" || playerSelection === "scissors" && computerSelection === "rock") {
+    } else if (playerSelection == "rock" && computerSelection == "paper" || playerSelection == "paper" && computerSelection == "scissors" || playerSelection == "scissors" && computerSelection == "rock") {
         roundResults.textContent = `You lost this round, ${computerSelection} beats ${playerSelection}`;
+        computerScore++;
         player.textContent = `Your score: ${playerScore}`;
-        computer.textContent = `Computer's score: ${computerScore++}`;
-    } else if (playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "paper" && computerSelection === "rock" || playerSelection === "scissors" && computerSelection === "paper") {
+        computer.textContent = `Computer's score: ${computerScore}`;
+    } else if (playerSelection == "rock" && computerSelection == "scissors" || playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissors" && computerSelection == "paper") {
         roundResults.textContent = `You won this round, ${playerSelection} beats ${computerSelection}`;
-        player.textContent = `Your score: ${playerScore++}`;
+        playerScore++;
+        player.textContent = `Your score: ${playerScore}`;
         computer.textContent = `Computer's score: ${computerScore}`;
     }
     getResults();

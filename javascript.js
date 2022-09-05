@@ -1,6 +1,10 @@
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => { button.addEventListener('click', getPlayerChoice)});
 
+const restart = document.getElementById('4');
+restart.removeEventListener('click', getPlayerChoice);
+restart.addEventListener('click', () => { window.location.reload();})
+
 const results = document.querySelector(".results");
 const roundResults = document.querySelector(".roundResults");
 
@@ -26,8 +30,6 @@ function getComputerChoice() {
     } else {
         computerSelection = "scissors";
 }
-    console.log(`Computer: ${computerChoiceId}`);
-    console.log(`Computer: ${(computerSelection)}`);
     return computerSelection;
     
 }
@@ -39,8 +41,6 @@ function getPlayerChoice(e) {
     if(playerChoiceId == 1){playerSelection = 'rock'}
     else if(playerChoiceId == 2){playerSelection = 'paper'}
     else(playerSelection = 'scissors');
-    console.log(playerChoiceId);
-    console.log(playerSelection);
     playRound(playerSelection, getComputerChoice());
 }
 
@@ -65,18 +65,18 @@ function playRound(playerSelection, computerSelection) {
     getResults();
 }
 
-    // Print the results //
+    // Print the results and stop reading input from buttons //
 
 function getResults(){
 if (playerScore == 5 || computerScore == 5) {
     if(playerScore > computerScore){
-        results.textContent = "You won the game against the computer!";
+        results.textContent = "Game over: You won the game against the computer!";
         buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
     } else if (computerScore > playerScore){
-        results.textContent = "A computer beat you lol";
+        results.textContent = "Game over: A computer beat you lol";
         buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
     } else {
-        results.textContent = "The game ends in a tie.";
+        results.textContent = "Game over: The game ends in a tie.";
         buttons.forEach((button) => { button.removeEventListener('click', getPlayerChoice)});
     }
 }

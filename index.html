@@ -12,18 +12,22 @@
     <body>
         <script src="javascript.js" defer></script>
         <div class="main-container">
-            <h1>Rock, Paper, Scissors Game</h1>
+            <h1><strong>Rock, Paper, Scissors Game</strong></h1>
             <p>Make a selection:</p>
             <div class="button-container">
                 <button id="1" class="rock"><img src="rock.png" height="60px" width="60px"></button>
                 <button id="2" class="paper"><img src="paper.png" height="60px" width="60px"></button>
                 <button id="3" class="scissors"><img src="scissors.png" height="60px" width="60px"></button>
-                <button id="4" class="restart"><img src="restart.png" height="60px" width="60px"></button>
+                <button id="4" class="restart" title="Restart game"><img src="restart.png" height="60px" width="60px"></button>
             </div>
-            <div class="results"></div>
-            <p class="roundResults"></p>
-            <p class="playerPoints"></p>
-            <p class="computerPoints"></p>
+            <div class="results">First one to reach 5 points wins.</div>
+            <p class="roundResults">Round results will be shown here.</p>
+            <div class="scores-container">
+                <div class="scores" id="box">
+                    <p class="playerPoints"></p>
+                    <p class="computerPoints"></p>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -3,7 +3,7 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    font-family: Manrope;
+    font-family: Manrope, roboto;
     height: 100vh;
     background: linear-gradient(
         180deg,
